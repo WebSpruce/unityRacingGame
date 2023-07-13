@@ -13,15 +13,29 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float MovementSpeed = 0.5f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private InputActionReference movement;
-    [SerializeField] private float timer = 0;
+    [SerializeField] public float timer = 0;
+    [Header("Player placement")]
+    [SerializeField] public bool isStarted = false;
+    [SerializeField] public bool isOnTrack = false;
+    [SerializeField] private GameObject summary;
 
     private Rigidbody playerRB;
     private Vector2 inputVector2Values;
-    [SerializeField] private bool isStarted = false;
-    [SerializeField] private bool isOnTrack = false;
+
+    public static PlayerMovement instance;
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else if (instance != null)
+        {
+            Destroy(this);
+        }
+
         playerRB = GetComponent<Rigidbody>();
     }
     private void Update()
@@ -67,29 +81,6 @@ public class PlayerMovement : MonoBehaviour
             playerRB.AddForce(Vector3.up * (jumpForce), ForceMode.Impulse);
         }
     }
-    //private void OnTriggerEnter(Collision other)
-    //{
-    //    if (other.gameObject.CompareTag("TrackStart") && !isStarted)
-    //    {
-    //        Debug.Log("START TIME");
-    //        isStarted = true;
-    //    }
-    //    if (other.gameObject.CompareTag("Track") && !isStarted)
-    //    {
-    //        Debug.Log("NOPE");
-    //    }
-    //    if (other.gameObject.CompareTag("Track") && isStarted && !isOnTrack)
-    //    {
-    //        isOnTrack = true;
-    //        Debug.Log("changed floor");
-    //    }
-    //    if (other.gameObject.CompareTag("TrackStop") && isStarted && isOnTrack)
-    //    {
-    //        Debug.Log($"STOP - {timer}");
-    //        isStarted = false;
-    //        isOnTrack = false;
-    //    }
-    //}
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("TrackStart") && !isStarted)
@@ -108,9 +99,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.CompareTag("TrackStop") && isStarted && isOnTrack)
         {
-            Debug.Log($"STOP - {timer}");
             isStarted = false;
             isOnTrack = false;
+            Debug.Log($"STOP - {timer}");
+            summary.SetActive(true);
+
         }
         if (other.gameObject.CompareTag("Ground") )
         {
@@ -119,14 +112,4 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("changed something");
         }
     }
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Track") && isStarted)
-    //    {
-    //        Debug.Log("STOP TIME");
-    //        isStarted = false;
-    //        isOnTrack = false;
-    //    }
-    //}
 }

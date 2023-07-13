@@ -9,6 +9,7 @@ TagManager:
   - TrackStop
   - Timer
   - Ground
+  - onGameUI
   layers:
   - Default
   - TransparentFX

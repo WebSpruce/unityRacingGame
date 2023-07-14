@@ -23,8 +23,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody playerRB;
     private Vector2 inputVector2Values;
+    private List<ResultValues> resultsList = new List<ResultValues>();
 
     public static PlayerMovement instance;
+    public string filename = "historyOfResults.json";
 
     void Awake()
     {
@@ -117,6 +119,10 @@ public class PlayerMovement : MonoBehaviour
             isOnTrack = false;
             Debug.Log($"STOP - {timer}");
             summary.SetActive(true);
+
+            resultsList.Add( new ResultValues(timer.ToString(), DateTime.Now) );
+            Debug.Log(resultsList[0].result);
+            FileHandler.SaveToJSON<ResultValues>(resultsList, filename);
 
         }
         if (other.gameObject.CompareTag("Ground") )

@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public bool isOnTrack = false;
     [SerializeField] private GameObject summary;
 
+    [SerializeField] private GameObject pauseObject;
+
     private Rigidbody playerRB;
     private Vector2 inputVector2Values;
 
@@ -63,7 +65,19 @@ public class PlayerMovement : MonoBehaviour
             timer = 0;
             GameObject.FindGameObjectWithTag("Timer").GetComponent<TextMeshProUGUI>().text = "0:0000";
         }
-        
+
+        //Pause
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseObject.active)
+        {
+            pauseObject.SetActive(false);
+            Time.timeScale = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && !pauseObject.active)
+        {
+            pauseObject.SetActive(true);
+            Time.timeScale = 0;
+        }
+
     }
 
     public void Jump(InputAction.CallbackContext callbackContext)

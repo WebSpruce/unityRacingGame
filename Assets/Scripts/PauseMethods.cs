@@ -1,30 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class SummaryMethods : MonoBehaviour
+public class PauseMethods : MonoBehaviour
 {
     private Transform player;
-    [SerializeField] private GameObject summary;
+    [SerializeField] private GameObject pauseObject;
     [SerializeField] private GameObject spawnPoint;
-    [SerializeField] private GameObject historyObject;
-    [SerializeField] private TextMeshProUGUI result;
-
-    public static SummaryMethods instance;
+    [SerializeField] private GameObject settingsObject;
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }else if (instance != null)
-        {
-            Destroy(this);
-        }
-
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        result.text = PlayerMovement.instance.timer.ToString();
+    }
+    public void Resume()
+    {
+        pauseObject.SetActive(false);
+        Time.timeScale = 1;
     }
     public void Quit()
     {
@@ -40,15 +31,15 @@ public class SummaryMethods : MonoBehaviour
     public void ResetLevel()
     {
         Time.timeScale = 0;
-        player.position = new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y + 1, spawnPoint.transform.position.z);
-        summary.SetActive(false);
+        player.position = new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y+1, spawnPoint.transform.position.z);
+        pauseObject.SetActive(false);
         PlayerMovement.instance.isStarted = false;
         PlayerMovement.instance.isOnTrack = false;
         PlayerMovement.instance.timer = 0;
         Time.timeScale = 1;
     }
-    public void History()
+    public void Settings()
     {
-        historyObject.SetActive(true);
+        settingsObject.SetActive(true);
     }
 }

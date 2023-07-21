@@ -69,12 +69,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Pause
-        if (Input.GetKeyDown(KeyCode.Escape) && pauseObject.active)
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseObject.activeSelf)
         {
             pauseObject.SetActive(false);
             Time.timeScale = 1;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && !pauseObject.active)
+        else if (Input.GetKeyDown(KeyCode.Escape) && !pauseObject.activeSelf)
         {
             pauseObject.SetActive(true);
             Time.timeScale = 0;

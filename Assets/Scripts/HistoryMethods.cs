@@ -16,7 +16,7 @@ public class HistoryMethods : MonoBehaviour
         {
             results = FileHandler.ReadFromJSON<ResultValues>(PlayerMovement.instance.filename);
             Vector3[] newPosition = new Vector3[results.Count];
-            newPosition[0] = new Vector3(ListViewItemPrefab.transform.position.x - 493, ListViewItemPrefab.transform.position.y - 90, ListViewItemPrefab.transform.position.y);
+            newPosition[0] = new Vector3(ListViewItemPrefab.transform.position.x, ListViewItemPrefab.transform.position.y - 40, ListViewItemPrefab.transform.position.y);
             for (int i = 0; i < results.Count; i++)
             {
                 if (i != 0)

@@ -7,3 +7,4 @@
 - Sounds/Music + settings for it
 - ~~Save result to history window~~
 - next levels/types of levels
+- points to complete the level

@@ -11,6 +11,8 @@ TagManager:
   - Ground
   - onGameUI
   - Summary
+  - additionalTrack
+  - Point
   layers:
   - Default
   - TransparentFX

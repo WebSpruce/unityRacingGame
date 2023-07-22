@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     public static PlayerMovement instance;
     public string filename = "historyOfResults.json";
+    public GameObject[] allPoints;
+    public bool[] hasPoint;
 
     void Awake()
     {
@@ -41,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerRB = GetComponent<Rigidbody>();
+
+        allPoints = GameObject.FindGameObjectsWithTag("Point");
+        hasPoint = new bool[allPoints.Length];
     }
     private void Update()
     {
@@ -99,23 +105,30 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Point") && isStarted && isOnTrack)
+        {
+            int firstEmptyIndex = Array.IndexOf(hasPoint, false);
+            hasPoint[firstEmptyIndex] = true;
+            other.gameObject.SetActive(false);
+        }
+
         if (other.gameObject.CompareTag("TrackStart") && !isStarted)
         {
             Debug.Log("START TIME");
             isStarted = true;
         }
-        if (other.gameObject.CompareTag("Track") && !isStarted)
+        if (other.gameObject.CompareTag("additionalTrack") && isStarted)
         {
-            Debug.Log("NOPE");
+            isOnTrack = true;
         }
         if (other.gameObject.CompareTag("Track") && isStarted && !isOnTrack)
         {
             isOnTrack = true;
             Debug.Log("changed floor");
         }
-        if (other.gameObject.CompareTag("TrackStop") && isStarted && isOnTrack)
+        if (other.gameObject.CompareTag("TrackStop") && isStarted && isOnTrack && hasPoint.All(x=>x))
         {
-            isStarted = false;
+            isStarted = false; 
             isOnTrack = false;
             Debug.Log($"STOP - {timer}");
             summary.SetActive(true);
@@ -123,13 +136,15 @@ public class PlayerMovement : MonoBehaviour
             resultsList.Add( new ResultValues(timer.ToString(), DateTime.Now) );
             Debug.Log(resultsList[0].result);
             FileHandler.SaveToJSON<ResultValues>(resultsList, filename);
-
         }
-        if (other.gameObject.CompareTag("Ground") )
+
+
+        if (other.gameObject.CompareTag("Ground"))
         {
             isStarted = false;
             isOnTrack = false;
-            Debug.Log("changed something");
+            Debug.Log("gr");
         }
     }
+
 }

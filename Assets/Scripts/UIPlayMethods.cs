@@ -30,7 +30,7 @@ public class UIPlayMethods : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
         }
-        else if (instance != null)
+        else
         {
             Destroy(this);
         }
@@ -44,7 +44,8 @@ public class UIPlayMethods : MonoBehaviour
     }
     public void Settings()
     {
-        settingsObject.SetActive(true);
+        //settingsObject.SetActive(true);
+        SceneManager.LoadScene(2);
     }
     public void QuitToMainMenu()
     {

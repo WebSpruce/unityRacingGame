@@ -19,8 +19,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public bool isStarted = false;
     [SerializeField] public bool isOnTrack = false;
     [SerializeField] private GameObject summary;
-
     [SerializeField] private GameObject pauseObject;
+    [Header("Player Audio")]
+    [SerializeField] private AudioSource audioSourcePoint;
 
     private Rigidbody playerRB;
     private Vector2 inputVector2Values;
@@ -110,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
             int firstEmptyIndex = Array.IndexOf(hasPoint, false);
             hasPoint[firstEmptyIndex] = true;
             other.gameObject.SetActive(false);
+            audioSourcePoint.Play();
         }
 
         if (other.gameObject.CompareTag("TrackStart") && !isStarted)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,38 +10,45 @@ public class SettingsMethods : MonoBehaviour
 {
     [Header("Titles")]
     private Slider[] sliders;
+    [SerializeField] private TextMeshProUGUI allSoundsTitle;
     [SerializeField] private TextMeshProUGUI musicTitle;
     [SerializeField] private TextMeshProUGUI pointsTitle;
-    private void Awake()
-    {
-
-        sliders = GameObject.FindObjectsOfType<Slider>();
-        if (PlayerPrefs.HasKey("MusicVolumeValue"))
-        {
-            sliders[0].value = PlayerPrefs.GetFloat("MusicVolumeValue");
-            musicTitle.text = $"Music Volume: {sliders[0].value.ToString()}";
-        }else if (PlayerPrefs.HasKey("PointsVolumeValue"))
-        {
-            sliders[1].value = PlayerPrefs.GetFloat("PointsVolumeValue");
-            pointsTitle.text = $"Points Volume: {sliders[1].value.ToString()}";
-        }
-    }
+    [SerializeField] private AudioMixer myAudioMixer;
+    private float value, value2, value0;
     void Start()
     {
-        Debug.Log($"sliders: {PlayerPrefs.GetFloat("MusicVolumeValue")} {PlayerPrefs.GetFloat("PointsVolumeValue")}");
+        sliders = GameObject.FindObjectsOfType<Slider>();
+        
+        myAudioMixer.GetFloat("AllSounds", out value0);
+        myAudioMixer.GetFloat("musicVolume", out value);
+        myAudioMixer.GetFloat("pointsVolume", out value2);
+        Debug.Log(value + " and " + value2 + " and " + value0);
+
+        sliders[0].value = value2;
+        sliders[1].value = value;
+        sliders[2].value = value0;
+        allSoundsTitle.text = $"All Sounds Volume:{(value0).ToString("#")}%";
+        musicTitle.text = $"Music Volume:{(value).ToString("#")}%";
+        pointsTitle.text = $"Points Volume:{(value2).ToString("#")}%";
     }
-    public void musicVolumeChanged()
+    public void allSoundsVolumeChanged(Slider slider)
     {
-        PlayerPrefs.SetFloat("MusicVolumeValue", sliders[0].value);
-        musicTitle.text = $"{sliders[0].value}";
+        AudioController.allVolume = slider.value;
+        allSoundsTitle.text = $"All Sounds Volume: {(slider.value).ToString("#")}%";
     }
-    public void pointVolumeChanged()
+    public void musicVolumeChanged(Slider slider)
     {
-        PlayerPrefs.SetFloat("PointsVolumeValue", sliders[1].value);
-        pointsTitle.text = $"{sliders[1].value}";
+        AudioController.musicVolume = slider.value;
+        musicTitle.text = $"Music Volume: {(slider.value).ToString("#")}%";
+    }
+    public void pointVolumeChanged(Slider slider)
+    {
+        AudioController.pointsVolume = slider.value;
+        pointsTitle.text = $"Points Volume: {(slider.value).ToString("#")}%";
     }
     public void Save()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
 }

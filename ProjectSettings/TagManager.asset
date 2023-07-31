@@ -13,6 +13,7 @@ TagManager:
   - Summary
   - additionalTrack
   - Point
+  - Wall
   layers:
   - Default
   - TransparentFX

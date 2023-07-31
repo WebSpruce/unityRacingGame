@@ -87,6 +87,12 @@ public class PlayerMovement : MonoBehaviour
             Time.timeScale = 0;
         }
 
+
+        //fall checker
+        if (transform.position.y < -10)
+        {
+            UIPlayMethods.instance.ResetLevel();
+        }
     }
 
     public void Jump(InputAction.CallbackContext callbackContext)
@@ -141,11 +147,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (other.gameObject.CompareTag("Ground"))
+        //if (other.gameObject.CompareTag("Ground"))
+        //{
+        //    isStarted = false;
+        //    isOnTrack = false;
+        //    Debug.Log("ground");
+        //}
+        if (other.gameObject.CompareTag("Wall"))
         {
             isStarted = false;
             isOnTrack = false;
-            Debug.Log("gr");
+            Debug.Log("wall");
         }
     }
 

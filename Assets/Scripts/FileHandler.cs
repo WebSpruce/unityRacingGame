@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,9 +8,18 @@ public static class FileHandler
 {
     public static void SaveToJSON<T>(List<T> toSave, string filename)
     {
-        Debug.Log(GetPath(filename));
-        string content = JsonHelper.ToJson<T>(toSave.ToArray());
-        WriteFile(GetPath(filename), content);
+        try
+        {
+            Debug.Log(GetPath(filename));
+            List<T> currentDataInFile = ReadFromJSON<T>(filename);
+            currentDataInFile.AddRange(toSave);
+            string content = JsonHelper.ToJson<T>(currentDataInFile.ToArray(), true);
+            WriteFile(GetPath(filename), content);
+
+        }catch(Exception ex)
+        {
+            Debug.Log($"error here: {ex}");
+        }
     }
     public static List<T> ReadFromJSON<T>(string filename)
     {

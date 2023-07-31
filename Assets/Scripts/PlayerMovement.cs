@@ -52,12 +52,12 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         inputVector2Values = movement.action.ReadValue<Vector2>();
-        
+
         playerRB.AddForce(new Vector3(inputVector2Values.x, 0, inputVector2Values.y) * MovementSpeed, ForceMode.Impulse);
 
         //rotation to direction of movement
-        Vector3 movement3 = new Vector3(inputVector2Values.x, 0 ,inputVector2Values.y).normalized;
-        if(movement3 != Vector3.zero)
+        Vector3 movement3 = new Vector3(inputVector2Values.x, 0, inputVector2Values.y).normalized;
+        if (movement3 != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(movement3);
             targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360 * Time.fixedDeltaTime);
@@ -99,13 +99,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (callbackContext.interaction is TapInteraction && callbackContext.performed)
         {
-            playerRB.AddForce(Vector3.up * (jumpForce-2), ForceMode.Impulse);
+            playerRB.AddForce(Vector3.up * (jumpForce - 2), ForceMode.Impulse);
         }
         if (callbackContext.interaction is HoldInteraction && callbackContext.performed)
         {
             playerRB.AddForce(Vector3.up * (jumpForce), ForceMode.Impulse);
         }
-        if(callbackContext.interaction is MultiTapInteraction && callbackContext.performed)
+        if (callbackContext.interaction is MultiTapInteraction && callbackContext.performed)
         {
             playerRB.AddForce(Vector3.up * (jumpForce), ForceMode.Impulse);
         }
@@ -134,25 +134,18 @@ public class PlayerMovement : MonoBehaviour
             isOnTrack = true;
             Debug.Log("changed floor");
         }
-        if (other.gameObject.CompareTag("TrackStop") && isStarted && isOnTrack && hasPoint.All(x=>x))
+        if (other.gameObject.CompareTag("TrackStop") && isStarted && isOnTrack && hasPoint.All(x => x))
         {
-            isStarted = false; 
+            isStarted = false;
             isOnTrack = false;
             Debug.Log($"STOP - {timer}");
             summary.SetActive(true);
 
-            resultsList.Add( new ResultValues(timer.ToString(), DateTime.Now) );
+            resultsList.Add(new ResultValues(timer.ToString(), DateTime.Now));
             Debug.Log(resultsList[0].result);
             FileHandler.SaveToJSON<ResultValues>(resultsList, filename);
         }
 
-
-        //if (other.gameObject.CompareTag("Ground"))
-        //{
-        //    isStarted = false;
-        //    isOnTrack = false;
-        //    Debug.Log("ground");
-        //}
         if (other.gameObject.CompareTag("Wall"))
         {
             isStarted = false;

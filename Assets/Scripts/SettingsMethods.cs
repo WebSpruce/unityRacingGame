@@ -22,33 +22,39 @@ public class SettingsMethods : MonoBehaviour
         myAudioMixer.GetFloat("AllSounds", out value0);
         myAudioMixer.GetFloat("musicVolume", out value);
         myAudioMixer.GetFloat("pointsVolume", out value2);
-        Debug.Log(value + " and " + value2 + " and " + value0);
 
         sliders[0].value = value2;
-        sliders[1].value = value;
-        sliders[2].value = value0;
-        allSoundsTitle.text = $"All Sounds Volume:{(value0).ToString("#")}%";
-        musicTitle.text = $"Music Volume:{(value).ToString("#")}%";
-        pointsTitle.text = $"Points Volume:{(value2).ToString("#")}%";
+        sliders[1].value = value0;
+        sliders[2].value = value;
+        allSoundsTitle.text = $"All Sounds Volume:{((value0 + 80) / 100f * 100f).ToString("#")}%";
+        musicTitle.text = $"Music Volume:{((value + 80) / 100f * 100f).ToString("#")}%";
+        pointsTitle.text = $"Points Volume:{((value2 + 80) / 100f * 100f).ToString("#")}%";
     }
     public void allSoundsVolumeChanged(Slider slider)
     {
         AudioController.allVolume = slider.value;
-        allSoundsTitle.text = $"All Sounds Volume: {(slider.value).ToString("#")}%";
+        allSoundsTitle.text = $"All Sounds Volume: {((slider.value + 80) / 100f * 100f).ToString("#")}%";
     }
     public void musicVolumeChanged(Slider slider)
     {
         AudioController.musicVolume = slider.value;
-        musicTitle.text = $"Music Volume: {(slider.value).ToString("#")}%";
+        musicTitle.text = $"Music Volume: {((slider.value + 80) / 100f * 100f).ToString("#")}%";
     }
     public void pointVolumeChanged(Slider slider)
     {
         AudioController.pointsVolume = slider.value;
-        pointsTitle.text = $"Points Volume: {(slider.value).ToString("#")}%";
+        pointsTitle.text = $"Points Volume: {((slider.value + 80) / 100f * 100f).ToString("#")}%";
     }
     public void Save()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(1);
+        if(MainMenuMethods.instance.previousSceneName == "MainMenuMethods")
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(1);
+        }
     }
 }

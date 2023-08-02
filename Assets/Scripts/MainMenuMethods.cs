@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuMethods : MonoBehaviour
 {
     public static MainMenuMethods instance;
+    public string previousSceneName = "MainMenuMethods";
     private void Awake()
     {
         if (instance == null)
@@ -24,7 +25,8 @@ public class MainMenuMethods : MonoBehaviour
     }
     public void Settings()
     {
-
+        previousSceneName = "MainMenuMethods";
+        SceneManager.LoadScene(2);
     }
     public void Quit()
     {

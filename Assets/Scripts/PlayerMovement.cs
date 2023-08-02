@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float timer = 0;
     [Header("Player placement")]
     [SerializeField] public bool isStarted = false;
-    [SerializeField] public bool isOnTrack = false;
     [SerializeField] private GameObject summary;
     [SerializeField] private GameObject pauseObject;
     [Header("Player Audio")]
@@ -64,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             playerRB.MoveRotation(targetRotation);
         }
 
-        if (isStarted && isOnTrack)
+        if (isStarted)
         {
             timer += 1 * Time.deltaTime;
             GameObject.FindGameObjectWithTag("Timer").GetComponent<TextMeshProUGUI>().text = timer.ToString();
@@ -112,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Point") && isStarted && isOnTrack)
+        if (other.gameObject.CompareTag("Point") && isStarted)
         {
             int firstEmptyIndex = Array.IndexOf(hasPoint, false);
             hasPoint[firstEmptyIndex] = true;
@@ -125,19 +124,9 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("START TIME");
             isStarted = true;
         }
-        if (other.gameObject.CompareTag("additionalTrack") && isStarted)
-        {
-            isOnTrack = true;
-        }
-        if (other.gameObject.CompareTag("Track") && isStarted && !isOnTrack)
-        {
-            isOnTrack = true;
-            Debug.Log("changed floor");
-        }
-        if (other.gameObject.CompareTag("TrackStop") && isStarted && isOnTrack && hasPoint.All(x => x))
+        if (other.gameObject.CompareTag("TrackStop") && isStarted && hasPoint.All(x => x))
         {
             isStarted = false;
-            isOnTrack = false;
             Debug.Log($"STOP - {timer}");
             summary.SetActive(true);
 
@@ -149,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Wall"))
         {
             isStarted = false;
-            isOnTrack = false;
+            for (int i = 0; i < allPoints.Length; i++) { allPoints[i].SetActive(true); hasPoint[i] = false; }
             Debug.Log("wall");
         }
     }

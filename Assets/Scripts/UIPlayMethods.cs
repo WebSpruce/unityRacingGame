@@ -44,6 +44,7 @@ public class UIPlayMethods : MonoBehaviour
     }
     public void Settings()
     {
+        MainMenuMethods.instance.previousSceneName = "UIPlayMethods";
         Time.timeScale = 0;
         SceneManager.LoadScene(2);
     }
@@ -71,7 +72,6 @@ public class UIPlayMethods : MonoBehaviour
         for (int i = 0; i < PlayerMovement.instance.allPoints.Length; i++) { PlayerMovement.instance.allPoints[i].SetActive(true); PlayerMovement.instance.hasPoint[i] = false; }
 
         PlayerMovement.instance.isStarted = false;
-        PlayerMovement.instance.isOnTrack = false;
         PlayerMovement.instance.timer = 0;
 
         if (summary.activeSelf)

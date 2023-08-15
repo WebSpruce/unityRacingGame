@@ -22,6 +22,5 @@ public class AudioController : MonoBehaviour
         myAudioMixer.GetFloat("AllSounds", out val0);
         myAudioMixer.GetFloat("musicVolume", out val1);
         myAudioMixer.GetFloat("pointsVolume", out val2);
-        Debug.Log($"{val0} and {val1} and {val2}");
     }
 }

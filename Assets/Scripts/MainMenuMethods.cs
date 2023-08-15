@@ -21,12 +21,13 @@ public class MainMenuMethods : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene(1,LoadSceneMode.Single);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(2,LoadSceneMode.Single);
     }
     public void Settings()
     {
         previousSceneName = "MainMenuMethods";
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
     public void Quit()
     {

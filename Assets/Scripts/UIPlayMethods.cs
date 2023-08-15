@@ -11,7 +11,8 @@ public class UIPlayMethods : MonoBehaviour
     [SerializeField] private GameObject summary;
     [SerializeField] private GameObject historyObject;
     [SerializeField] private TextMeshProUGUI result;
-
+    [SerializeField] private GameObject btnNextLevel;
+    private int sceneIndex;
 
     [Header("Pause Window")]
     [SerializeField] private GameObject pauseObject;
@@ -37,6 +38,23 @@ public class UIPlayMethods : MonoBehaviour
 
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
+    private void OnEnable()
+    {
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextLevelIndex = sceneIndex + 1;
+        int amountOfScenes = SceneManager.sceneCountInBuildSettings;
+        Debug.Log($"next: {nextLevelIndex} , amount: {amountOfScenes}");
+        if (nextLevelIndex > amountOfScenes)
+        {
+            btnNextLevel.SetActive(false); 
+            Debug.Log($"onenable no");
+        }
+        else
+        {
+            btnNextLevel.SetActive(true); 
+            Debug.Log($"onenable yes");
+        }
+    }
     public void Resume()
     {
         pauseObject.SetActive(false);
@@ -46,10 +64,11 @@ public class UIPlayMethods : MonoBehaviour
     {
         MainMenuMethods.instance.previousSceneName = "UIPlayMethods";
         Time.timeScale = 0;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
     public void QuitToMainMenu()
     {
+        Time.timeScale = 0;
         SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
     public void Quit()
@@ -87,5 +106,15 @@ public class UIPlayMethods : MonoBehaviour
     public void History()
     {
         historyObject.SetActive(true);
+    }
+    public void NextLevel()
+    {
+        int nextLevelIndex = sceneIndex + 1;
+        int amountOfScenes = SceneManager.sceneCountInBuildSettings;
+        if (nextLevelIndex > amountOfScenes)
+        {
+            Debug.Log($"nextlevel");
+            SceneManager.LoadScene(nextLevelIndex);
+        }
     }
 }

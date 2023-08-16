@@ -1,7 +1,6 @@
 # Unity - Racing Game
 
 ### **TODO:**
-- Gameplay: stop timer while player is crossing track
 
 DOING
 - next levels/types of levels
@@ -15,3 +14,4 @@ DONE
 - ~~Sounds/Music + settings for it~~
 - ~~reset position of player while falling down~~
 - ~~MainMenu Window~~
+- ~~Adjust history board for other levels~~

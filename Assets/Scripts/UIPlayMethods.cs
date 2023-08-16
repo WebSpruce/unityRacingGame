@@ -43,7 +43,6 @@ public class UIPlayMethods : MonoBehaviour
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextLevelIndex = sceneIndex + 1;
         int amountOfScenes = SceneManager.sceneCountInBuildSettings;
-        Debug.Log($"next: {nextLevelIndex} , amount: {amountOfScenes}");
         if (nextLevelIndex > amountOfScenes)
         {
             btnNextLevel.SetActive(false); 
@@ -111,7 +110,7 @@ public class UIPlayMethods : MonoBehaviour
     {
         int nextLevelIndex = sceneIndex + 1;
         int amountOfScenes = SceneManager.sceneCountInBuildSettings;
-        if (nextLevelIndex > amountOfScenes)
+        if (nextLevelIndex < amountOfScenes)
         {
             Debug.Log($"nextlevel");
             SceneManager.LoadScene(nextLevelIndex);

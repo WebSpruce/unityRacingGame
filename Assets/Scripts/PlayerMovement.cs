@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private List<ResultValues> resultsList = new List<ResultValues>();
 
     public static PlayerMovement instance;
-    public string filename = "historyOfResults.json";
+    public string filename;
     public GameObject[] allPoints;
     public bool[] hasPoint;
 
@@ -94,6 +94,11 @@ public class PlayerMovement : MonoBehaviour
             UIPlayMethods.instance.ResetLevel();
         }
     }
+    private void OnEnable()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        filename = $"historyOfResults{sceneIndex-1}.json";
+    }
 
     public void Jump(InputAction.CallbackContext callbackContext)
     {
@@ -132,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
             summary.SetActive(true);
 
             resultsList.Add(new ResultValues(timer.ToString(), DateTime.Now));
-            Debug.Log(resultsList[0].result);
             FileHandler.SaveToJSON<ResultValues>(resultsList, filename);
         }
 
@@ -140,7 +144,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isStarted = false;
             for (int i = 0; i < allPoints.Length; i++) { allPoints[i].SetActive(true); hasPoint[i] = false; }
-            Debug.Log("wall");
         }
     }
 

@@ -37,22 +37,29 @@ public class UIPlayMethods : MonoBehaviour
         }
 
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
+        MainMenuMethods.instance.previousSceneName = SceneManager.GetActiveScene().name;
+        Debug.Log($"name of active scene: {MainMenuMethods.instance.previousSceneName}");
     }
     private void OnEnable()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextLevelIndex = sceneIndex + 1;
         int amountOfScenes = SceneManager.sceneCountInBuildSettings;
-        if (nextLevelIndex > amountOfScenes)
+        if (btnNextLevel != null)
         {
-            btnNextLevel.SetActive(false); 
-            Debug.Log($"onenable no");
+            if (nextLevelIndex > amountOfScenes)
+            {
+                btnNextLevel.SetActive(false);
+                Debug.Log($"onenable no");
+            }
+            else
+            {
+                btnNextLevel.SetActive(true);
+                Debug.Log($"onenable yes");
+            }
         }
-        else
-        {
-            btnNextLevel.SetActive(true); 
-            Debug.Log($"onenable yes");
-        }
+        
     }
     public void Resume()
     {
@@ -115,5 +122,10 @@ public class UIPlayMethods : MonoBehaviour
             Debug.Log($"nextlevel");
             SceneManager.LoadScene(nextLevelIndex);
         }
+    }
+    public void ChangeSkin()
+    {
+        Time.timeScale = 0;
+        SceneManager.LoadScene(2);
     }
 }

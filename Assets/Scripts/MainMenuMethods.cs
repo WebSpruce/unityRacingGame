@@ -19,10 +19,15 @@ public class MainMenuMethods : MonoBehaviour
             Destroy(this);
         }
     }
+    private void OnEnable()
+    {
+        previousSceneName = SceneManager.GetActiveScene().name;
+        Debug.Log($"name of active scene: {previousSceneName}");
+    }
     public void StartGame()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(2,LoadSceneMode.Single);
+        SceneManager.LoadScene(3,LoadSceneMode.Single);
     }
     public void Settings()
     {

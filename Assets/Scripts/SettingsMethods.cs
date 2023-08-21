@@ -47,14 +47,20 @@ public class SettingsMethods : MonoBehaviour
     }
     public void Save()
     {
-        if(MainMenuMethods.instance.previousSceneName == "MainMenuMethods")
+        Debug.Log($"name of active scene: {MainMenuMethods.instance.previousSceneName}");
+        if (MainMenuMethods.instance.previousSceneName == "MainMenu")
         {
             SceneManager.LoadScene(0);
+        }
+        else if(MainMenuMethods.instance.previousSceneName == "UIPlayMethods")
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(3);
         }
         else
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(4);
         }
     }
 }

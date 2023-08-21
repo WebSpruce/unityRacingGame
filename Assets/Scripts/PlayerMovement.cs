@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -28,12 +30,26 @@ public class PlayerMovement : MonoBehaviour
     private List<ResultValues> resultsList = new List<ResultValues>();
 
     public static PlayerMovement instance;
+    public MeshFilter playerMF;
     public string filename;
     public GameObject[] allPoints;
     public bool[] hasPoint;
 
     void Awake()
     {
+        if (PlayerPrefs.GetString("MeshFilter") != null)
+        {
+            string meshFilterDefault = PlayerPrefs.GetString("MeshFilter", "Meshes/Mesh0");
+            playerMF = GetComponent<MeshFilter>();
+            playerMF.mesh = (Mesh)Resources.Load(meshFilterDefault, typeof(Mesh));
+        }
+        else
+        {
+            PlayerPrefs.SetString($"MeshFilter", "Meshes/Mesh0");
+        }
+
+
+
         if (instance == null)
         {
             instance = this;

@@ -12,11 +12,11 @@ public class UIPlayMethods : MonoBehaviour
     [SerializeField] private GameObject historyObject;
     [SerializeField] private TextMeshProUGUI result;
     [SerializeField] private GameObject btnNextLevel;
+    [SerializeField] private GameObject newRecord;
     private int sceneIndex;
 
     [Header("Pause Window")]
     [SerializeField] private GameObject pauseObject;
-    [SerializeField] private GameObject settingsObject;
 
     [Header("For all")]
     [SerializeField] private GameObject spawnPoint;
@@ -127,5 +127,9 @@ public class UIPlayMethods : MonoBehaviour
     {
         Time.timeScale = 0;
         SceneManager.LoadScene(2);
+    }
+    public void CloseRecord()
+    {
+        newRecord.SetActive(false);
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
@@ -20,8 +22,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float timer = 0;
     [Header("Player placement")]
     [SerializeField] public bool isStarted = false;
+    [Header("Windows")]
     [SerializeField] private GameObject summary;
     [SerializeField] private GameObject pauseObject;
+    [SerializeField] private GameObject newRecord;
     [Header("Player Audio")]
     [SerializeField] private AudioSource audioSourcePoint;
 
@@ -153,6 +157,22 @@ public class PlayerMovement : MonoBehaviour
             summary.SetActive(true);
 
             resultsList.Add(new ResultValues(timer.ToString(), DateTime.Now));
+
+            float min = float.MaxValue;
+            List<ResultValues> savedResultValues = FileHandler.ReadFromJSON<ResultValues>(filename);
+            foreach(var value in savedResultValues)
+            {
+                if (min > float.Parse(value.result))
+                {
+                    min = float.Parse(value.result);
+                }
+            }
+            Debug.Log($"min: {min} - {timer}");
+            if (min > timer)
+            {
+                newRecord.SetActive(true);
+            }
+
             FileHandler.SaveToJSON<ResultValues>(resultsList, filename);
         }
 

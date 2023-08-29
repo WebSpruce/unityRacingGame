@@ -15,8 +15,6 @@ public class UISkinManager : MonoBehaviour
     private int skinCount = 0;
     private GameObject[] btnsSkin;
     private TextMeshProUGUI skinName;
-
-    public string previousSceneName = "SampleScene";
   
     void Start()
     {
@@ -82,13 +80,13 @@ public class UISkinManager : MonoBehaviour
     public void Back()
     {
         Time.timeScale = 1;
-        if(previousSceneName == "SampleScene")
+        if(MainMenuMethods.instance.previousSceneName == "SampleScene")
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene("SampleScene");
         }
-        else if (previousSceneName == "Level2")
+        else if (MainMenuMethods.instance.previousSceneName == "Level2")
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene("Level2");
         }
     }
 }

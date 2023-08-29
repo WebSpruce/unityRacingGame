@@ -34,7 +34,9 @@ public class PlayerMovement : MonoBehaviour
     private List<ResultValues> resultsList = new List<ResultValues>();
 
     public static PlayerMovement instance;
+    [Header("Skin")]
     public MeshFilter playerMF;
+    [Space(10)]
     public string filename;
     public GameObject[] allPoints;
     public bool[] hasPoint;

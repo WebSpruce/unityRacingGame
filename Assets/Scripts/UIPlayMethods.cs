@@ -37,12 +37,12 @@ public class UIPlayMethods : MonoBehaviour
         }
 
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
-        MainMenuMethods.instance.previousSceneName = SceneManager.GetActiveScene().name;
-        Debug.Log($"name of active scene: {MainMenuMethods.instance.previousSceneName}");
     }
     private void OnEnable()
     {
+        MainMenuMethods.instance.previousSceneName = SceneManager.GetActiveScene().name;
+        Debug.Log($"name of active scene: {MainMenuMethods.instance.previousSceneName}");
+
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextLevelIndex = sceneIndex + 1;
         int amountOfScenes = SceneManager.sceneCountInBuildSettings;
@@ -68,7 +68,6 @@ public class UIPlayMethods : MonoBehaviour
     }
     public void Settings()
     {
-        MainMenuMethods.instance.previousSceneName = "UIPlayMethods";
         Time.timeScale = 0;
         SceneManager.LoadScene(1);
     }

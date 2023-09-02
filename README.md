@@ -18,8 +18,8 @@ DONE
 
 | ## Screenshots: |            |
 | ----------------| ---------- |
-| <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/36031d5a-a97c-4918-b891-b1d32da0991a" width=700> | <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/4d2d26c3-a832-429f-8762-eb880f5a0f05" width=700> |
-| <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/e1ae4773-3edf-4a13-b5e3-cdad4fde20d3" width=700> | <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/36c845a9-6ff2-4f1e-b838-f950423c02b9" width=700> |
+| <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/00252ba0-0a0a-4bb0-a454-4a4e386b1ce5" width=700> | <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/b9535984-d3c8-4e0f-9490-9271df4a704c" width=700> |
+| <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/5236edf8-11ed-4b48-860d-fb289b484e85" width=700> | <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/1e72a4f0-8bf3-49be-b4ff-79170e3e4065" width=700> |
 
 
 

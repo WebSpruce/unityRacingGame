@@ -22,7 +22,6 @@ public class MainMenuMethods : MonoBehaviour
     private void OnEnable()
     {
         previousSceneName = SceneManager.GetActiveScene().name;
-        Debug.Log($"name of active scene: {previousSceneName}");
     }
     public void StartGame()
     {

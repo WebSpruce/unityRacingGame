@@ -41,7 +41,6 @@ public class UIPlayMethods : MonoBehaviour
     private void OnEnable()
     {
         MainMenuMethods.instance.previousSceneName = SceneManager.GetActiveScene().name;
-        Debug.Log($"name of active scene: {MainMenuMethods.instance.previousSceneName}");
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextLevelIndex = sceneIndex + 1;
@@ -51,12 +50,10 @@ public class UIPlayMethods : MonoBehaviour
             if (nextLevelIndex > amountOfScenes)
             {
                 btnNextLevel.SetActive(false);
-                Debug.Log($"onenable no");
             }
             else
             {
                 btnNextLevel.SetActive(true);
-                Debug.Log($"onenable yes");
             }
         }
         

@@ -169,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
                     min = float.Parse(value.result);
                 }
             }
-            Debug.Log($"min: {min} - {timer}");
+
             if (min > timer)
             {
                 newRecord.SetActive(true);

@@ -47,7 +47,6 @@ public class SettingsMethods : MonoBehaviour
     }
     public void Save()
     {
-        Debug.Log($"name of active scene: {MainMenuMethods.instance.previousSceneName}");
         if (MainMenuMethods.instance.previousSceneName == "MainMenuMethods")
         {
             SceneManager.LoadScene("MainMenu");

@@ -27,17 +27,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject pauseObject;
     [SerializeField] private GameObject newRecord;
     [Header("Player Audio")]
-    [SerializeField] private AudioSource audioSourcePoint;
+    [SerializeField] public AudioSource audioSourcePoint;
+    [Space(30)]
 
     private Rigidbody playerRB;
     private Vector2 inputVector2Values;
     private List<ResultValues> resultsList = new List<ResultValues>();
 
+
     public static PlayerMovement instance;
-    [Header("Skin")]
+
+    [HideInInspector]
     public MeshFilter playerMF;
-    [Space(10)]
+    [HideInInspector]
     public string filename;
+
     public GameObject[] allPoints;
     public bool[] hasPoint;
 
@@ -53,8 +57,6 @@ public class PlayerMovement : MonoBehaviour
         {
             PlayerPrefs.SetString($"MeshFilter", "Meshes/Mesh0");
         }
-
-
 
         if (instance == null)
         {
@@ -139,14 +141,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Point") && isStarted)
-        {
-            int firstEmptyIndex = Array.IndexOf(hasPoint, false);
-            hasPoint[firstEmptyIndex] = true;
-            other.gameObject.SetActive(false);
-            audioSourcePoint.Play();
-        }
-
         if (other.gameObject.CompareTag("TrackStart") && !isStarted)
         {
             Debug.Log("START TIME");
@@ -176,12 +170,6 @@ public class PlayerMovement : MonoBehaviour
             }
 
             FileHandler.SaveToJSON<ResultValues>(resultsList, filename);
-        }
-
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            isStarted = false;
-            for (int i = 0; i < allPoints.Length; i++) { allPoints[i].SetActive(true); hasPoint[i] = false; }
         }
     }
 

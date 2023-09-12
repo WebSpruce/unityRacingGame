@@ -10,12 +10,13 @@ Additionally, you must be careful, because when you hit walls or you fall off th
 
 <hr>
 
-TASKS
+levels:
 - [x] Level 1
 - [x] Level 2
 - [x] Level 3
 - [ ] Level 4
 
+other tasks:
 - [x] ~~MainMenu Window~~
 - [x] ~~Resume Window: resume, reset level, settings, quit~~
 - [x] ~~Summary Window: History Window~~
@@ -26,3 +27,9 @@ TASKS
 - [x] ~~Adjust history board for other levels~~
 - [x] ~~Sine waves for walls~~
 - [x] ~~Cinemachine cameras~~
+
+| Screenshots: |            |
+| ----------------| ---------- |
+| <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/b8c2005f-99b4-4520-89a8-6c06590442d3" width=500> | <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/697e70e4-191e-433a-ac11-58b6f3839858" width=500> |
+| <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/cdc0517e-315e-4218-9295-44da3ae7442d" width=500> | <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/4641c71a-5cd9-4842-93fe-7edbc01b38ca" width=500> |
+| <img src="https://github.com/WebSpruce/unityRacingGame/assets/117351406/8be84b2a-65ac-4dee-8020-f1030bce485f" width=500> |

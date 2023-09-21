@@ -14,7 +14,7 @@ levels:
 - [x] Level 1
 - [x] Level 2
 - [x] Level 3
-- [ ] Level 4
+- [x] Level 4
 
 other tasks:
 - [x] ~~MainMenu Window~~
